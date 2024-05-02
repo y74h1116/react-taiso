@@ -1,8 +1,8 @@
 services:
-  react_with_ts:
+  react_taiso:
     build:
       context: ./docker/react
-    container_name: react_with_ts
+    container_name: react_taiso
     tty: true
     ports:
       - 5173:5173
