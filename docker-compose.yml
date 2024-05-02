@@ -1,0 +1,21 @@
+services:
+  react_with_ts:
+    build:
+      context: ./docker/react
+    container_name: react_with_ts
+    tty: true
+    ports:
+      - 5173:5173
+    volumes:
+      - ./:/home/react-ts-app
+    # Vite では、デフォルトは 127.0.0.1 のみ listen するみたいで、外部からアクセスできいようだ
+    # --host オプションを指定すると外部にも公開できるので指定しておきます
+    #
+    # 参照 : https://ja.vitejs.dev/config/server-options.html
+    # > サーバーがリッスンすべき IP アドレスを指定します。 0.0.0.0 もしくは true に設定すると、LAN やパブリックアドレスを含むすべてのアドレスをリッスンします。
+    # > これは CLI で --host 0.0.0.0 や --host を使用して設定できます。
+    #
+    # なお npm で実行するコマンドに対してオプションを指定する場合は、-- を指定するようになっているようだ
+    # 参照 : https://docs.npmjs.com/cli/v10/commands/npm-run-script
+    # > npm run-script <command> [-- <args>]
+    command: npm run dev -- --host
